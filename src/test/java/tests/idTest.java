@@ -31,6 +31,8 @@ public class idTest {
             parsedHL7 sortedDocToPOJO = gson.fromJson(sortedDocToJson, parsedHL7.class);
 
             ObjectId id = sortedDocToPOJO.getId();
+            Assert.assertTrue(id.getClass().getSimpleName().equals("ObjectId"));
+
             String idToString = id.toString();
             //System.out.println(idToString);
             Assert.assertFalse(idToString.isEmpty());
@@ -39,7 +41,7 @@ public class idTest {
 
         }
         System.out.println(idToStringList.size());
-        Assert.assertEquals(idToStringList.size(), 50);
+        Assert.assertEquals(idToStringList.size(),sortedDocs.size());
     }
 
 }
