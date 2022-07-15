@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name = "Regression Suite">
+    <test name = "connectToClusterTest">
+        <classes>
+            <class name="tests.connectToClusterTest" />
+        </classes>
+    </test>
+
+    <test name = "connectToParsedHL7CollectionTest">
+        <classes>
+            <class name="tests.connectToParsedHL7ColTest" />
+        </classes>
+    </test>
+
+</suite>
