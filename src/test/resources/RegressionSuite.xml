@@ -2,13 +2,13 @@
 <suite name = "Regression Suite">
     <test name = "connectToClusterTest">
         <classes>
-            <class name="tests.connectToClusterTest" />
+            <class name="tests.MongoDB.connectToClusterTest" />
         </classes>
     </test>
 
     <test name = "connectToParsedHL7CollectionTest">
         <classes>
-            <class name="tests.connectToParsedHL7ColTest" />
+            <class name="tests.MongoDB.connectToParsedHL7ColTest" />
         </classes>
     </test>
 

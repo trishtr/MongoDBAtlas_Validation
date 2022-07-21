@@ -1,4 +1,4 @@
-package tests;
+package tests.MongoDB;
 
 import java.util.List;
 import java.util.Map;
@@ -7,6 +7,7 @@ import models.parsedHL7;
 import org.bson.Document;
 
 import com.google.gson.Gson;
+import tests.MongoDB.baseClass;
 import utilities.Log;
 
 public class extractedPayload {

@@ -1,4 +1,4 @@
-package tests;
+package tests.MongoDB;
 
 import com.google.gson.Gson;
 import models.parsedHL7;
@@ -6,6 +6,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tests.MongoDB.baseClass;
 import utilities.Log;
 
 import java.util.HashSet;

@@ -39,4 +39,19 @@ public class ReadConfig {
         String parsedHL7Collection = prop.getProperty("parsedHL7Coll");
         return parsedHL7Collection;
     }
+
+    public String getEventType()
+    {
+        String eventType = prop.getProperty("eventType");
+        return eventType;
+    }
+
+    public String getEventSubType()
+    {
+        String eventSubType = prop.getProperty("eventSubType");
+        return eventSubType;
+    }
+
+
+
 }

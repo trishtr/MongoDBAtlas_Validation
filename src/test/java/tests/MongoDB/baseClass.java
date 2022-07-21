@@ -1,4 +1,4 @@
-package tests;
+package tests.MongoDB;
 import configuration.connectionSetup;
 import org.bson.Document;
 
