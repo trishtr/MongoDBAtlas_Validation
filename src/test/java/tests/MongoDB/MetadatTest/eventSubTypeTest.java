@@ -1,10 +1,11 @@
-package tests.MongoDB;
+package tests.MongoDB.MetadatTest;
 
 import com.google.gson.Gson;
 import models.parsedHL7;
 import org.bson.Document;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import tests.MongoDB.TestBase.baseClass;
 import utilities.Log;
 import utilities.ReadConfig;
 

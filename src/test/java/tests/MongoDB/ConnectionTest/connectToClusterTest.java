@@ -1,4 +1,4 @@
-package tests.MongoDB;
+package tests.MongoDB.ConnectionTest;
 import com.google.gson.Gson;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
