@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class timeStampProcessor {
     //correct
-    public static boolean isValidIOS8601(String timeStamp){
+    public static boolean isValidISO8601(String timeStamp){
 
         try{
             Instant stringToDateFormat = Instant.parse(timeStamp);
