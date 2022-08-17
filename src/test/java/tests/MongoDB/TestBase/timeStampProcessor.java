@@ -25,6 +25,22 @@ public class timeStampProcessor {
         return true;
     }
 
+    public boolean isValidTimeStampFormat(String timeStamp) throws ParseException{
+
+        try{
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+            sdf.parse(timeStamp);
+            return true;
+        }
+        catch (DateTimeParseException e) {
+            // Throws DateTimeParseException
+            // if the string cannot be parsed
+            System.out.println("Exception: " + e);
+            return false;
+            
+        }
+        
+    }
 
     public long dataRefreshInterval(String timeStamp) throws ParseException {
 
