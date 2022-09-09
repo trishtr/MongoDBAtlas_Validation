@@ -42,4 +42,30 @@ public class baseClass {
 
 
     }
+    
+    public List<Document> retrieveDocForS3CrossCheck(String fromTime, String toTime){
+
+        Log.info("Connect to database");
+
+        ReadConfig readConfig = new ReadConfig();
+        connectionSetup setup = new connectionSetup();
+        timeStampProcessor processor = new timeStampProcessor();
+        String connectionString = readConfig.getConnectionString();
+        String databaseName = readConfig.getSCMDataLakeDatabaseName();
+        String parsedHL7 = readConfig.getparsedHL7CollectionName();
+        
+        MongoClient mongoClient = MongoClients.create(connectionString);
+
+        MongoCollection<Document> parsedHL7Collection = 
+        setup.connectToCollection(connectionString, databaseName, parsedHL7);
+
+        List<Document> docsS3Check = new ArrayList<>();
+        parsedHL7Collection.find(and(gte("timestamp", fromTime),
+        lte("timestamp", toTime))).limit(50).into(docsS3Check);
+        
+        return docsS3Check;
+
+            
+    }
+   
 }
