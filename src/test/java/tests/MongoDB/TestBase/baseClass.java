@@ -43,6 +43,32 @@ public class baseClass {
 
     }
     
+    public List<Document> retrieveSpecificEventDoc(String messageType){
+
+        //connect to the database
+        Log.info("Connect to database");
+
+        ReadConfig readConfig = new ReadConfig();
+        connectionSetup setup = new connectionSetup();
+        String connectionString = readConfig.getConnectionString();
+        String databaseName = readConfig.getSCMDataLakeDatabaseName();
+        String parsedHL7 = readConfig.getparsedHL7CollectionName();
+
+        MongoClient mongoClient = MongoClients.create(connectionString);
+
+        MongoCollection<Document> parsedHL7Collection = 
+        setup.connectToCollection(connectionString, databaseName, parsedHL7);
+
+
+        //sort by timestamp descending, limit to 50
+        Log.info("sort 50 latest specific documents");
+
+        List<Document> sortedDocuments = new ArrayList<>();
+        parsedHL7Collection.find(eq("EventTypeCode",messageType)).sort(descending("timestamp")).limit(50).into(sortedDocuments);
+        return sortedDocuments;
+
+    }
+    
     public List<Document> retrieveDocForS3CrossCheck(String fromTime, String toTime){
 
         Log.info("Connect to database");
