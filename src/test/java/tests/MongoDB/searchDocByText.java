@@ -22,31 +22,39 @@ public static void main(String[] args) {
        
         String connectionString = "";
         
-        String databaseName = "";
-        //CollectionName
-        String parsedHL7 = "";
+        String databaseName = "scm-data-lake";
+        String parsedHL7 = "parsed-hl7";
         
         MongoClient mongoClient = MongoClients.create(connectionString);
 
         MongoCollection<Document> parsedHL7Collection = 
         setup.connectToCollection(connectionString, databaseName, parsedHL7);
-         
-        //if we havent created a text indexes, first need to create text Index and pass the field want to sort
+
         //parsedHL7Collection.createIndex(Indexes.text("eventId"));
 
-        Bson filter = Filters.text("4b2c");
+    
+        Bson filter = Filters.text("test");
         List<Document> sortedDocs = new ArrayList<>();
-        parsedHL7Collection.find(filter).limit(10).into(sortedDocs);
-        
-        for (Document sortedDoc : sortedDocs)
-        {
+        parsedHL7Collection.find(filter).limit(5).into(sortedDocs);
+
+        if (sortedDocs.size() > 0){
+            System.out.println("Succesfully filter dataset");
+    
+            for (Document sortedDoc : sortedDocs)
+            {
             //convert every document to json format
             
             String sortedDocToJson = sortedDoc.toJson();
        
             System.out.println(sortedDocToJson);
-        
-    }
-    }
+            
+            }
+        }
+        else {
+    
+        System.out.println("No dataset is found");}
+    
+    
+}
 }
     
