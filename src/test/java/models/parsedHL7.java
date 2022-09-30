@@ -13,7 +13,7 @@ public class parsedHL7 {
     private String eventSource;
     private String timestamp;
     private Map payload;
-    private List<Map> log;
+    private List<LogContainer> log;
 
     public ObjectId getId() {
         return _id;
