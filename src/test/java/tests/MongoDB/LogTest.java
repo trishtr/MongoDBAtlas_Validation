@@ -1,5 +1,9 @@
+package dpautomation.tests.MongoDB.LogTest;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+
 
 import org.bson.Document;
 import org.testng.Assert;
@@ -7,10 +11,12 @@ import org.testng.annotations.Test;
 
 import com.google.gson.Gson;
 
+import dpautomation.models.LogContainer;
+import dpautomation.utilities.Log;
 import dpautomation.models.parsedHL7;
 import dpautomation.tests.MongoDB.TestBase.baseClass;
 import dpautomation.tests.MongoDB.TestBase.timeStampProcessor;
-import dpautomation.utilities.Log;
+
 
 public class LogTest {
 
@@ -22,8 +28,10 @@ public class LogTest {
         
         List<Document> sortedDocs = base.retrieveDocuments();
 
+    
         Log.info("Verify log.timestamp is not null/empty, and in correct format");
-        Log.info("Verify log.function is not null/empty, and contains : scm-pipeline");
+        Log.info("Verify log.function is not null/empty, and contains : ");
+        Log.info("Verify log.function is not null/empty, and contains : ");
         Log.info("Verify Log.results is not null/empty, and value is OK");
        
 
@@ -38,30 +46,44 @@ public class LogTest {
             parsedHL7 sortedDocToPOJO = gson.fromJson(sortedDocToJson, parsedHL7.class);
             
             //System.out.println(sortedDocToJson);
-            List<Map> Log = sortedDocToPOJO.getLog();
+            List<LogContainer> LogContainerLst = sortedDocToPOJO.getLog();
+            List resultLst = new ArrayList<>();
+            List functionLst = new ArrayList<>();
+            List timeStampLst = new ArrayList<>();
             
-            Assert.assertFalse(Log.isEmpty());
             
-            //System.out.println(Log);
-            for(Map log : Log)
+            Assert.assertFalse(LogContainerLst.isEmpty());
+            
+            //System.out.println(LogContainerLst);
+            for(LogContainer log : LogContainerLst)
             {
-                String result = (String) log.get("result");
-                //System.out.println(result);
-                Assert.assertFalse(result.isEmpty());
-                Assert.assertTrue(result.equals("OK"));
+    
+                String result = log.getResult();
+                resultLst.add(result);
 
-                String function = (String) log.get("function");
-                Assert.assertFalse(function.isEmpty());
-                Assert.assertTrue(function.contains("scm-oi-lamb-useast1-qa-msk-to-mongo-writer"));
-                Assert.assertTrue(function.contains("scm-oi-lamb-useast1-qa-msk-to-msk-parser"));
-
-
-                String timeStamp = (String) log.get("timestamp");
-                Assert.assertFalse(timeStamp.isEmpty());
-                Assert.assertTrue(timeProcessor.isValidISO8601(timeStamp));
-
+                String function = log.getFunction();
+                functionLst.add(function);
+        
+                String timeStamp = log.getTimestamp();
+                timeStampLst.add(timeStamp);
+               
 
             }
+
+            Assert.assertFalse(resultLst.isEmpty());
+            Assert.assertTrue(resultLst.contains("OK"));
+
+            Assert.assertFalse(functionLst.isEmpty());
+            Assert.assertTrue(functionLst.contains(""));
+            Assert.assertTrue(functionLst.contains(""));
+
+            Assert.assertFalse(timeStampLst.isEmpty());
+            Assert.assertTrue(timeProcessor.isValidISO8601((String) timeStampLst.get(0)));
+            Assert.assertTrue(timeProcessor.isValidISO8601((String) timeStampLst.get(1)));
+
+
+
+
 
             
 
@@ -70,3 +92,4 @@ public class LogTest {
     }
     
 }
+
