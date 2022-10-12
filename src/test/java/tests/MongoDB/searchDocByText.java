@@ -22,8 +22,8 @@ public static void main(String[] args) {
        
         String connectionString = "";
         
-        String databaseName = "scm-data-lake";
-        String parsedHL7 = "parsed-hl7";
+        String databaseName = "";
+        String parsedHL7 = "";
         
         MongoClient mongoClient = MongoClients.create(connectionString);
 
